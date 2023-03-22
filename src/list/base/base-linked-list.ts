@@ -33,5 +33,9 @@ export abstract class BaseLinkedList<T, U extends InstanceType<typeof BaseNodeLi
 
   protected abstract getNodeByIndex(index: number): U | null
 
+<<<<<<< HEAD
   protected abstract insertInLastPosition(node: U): void
+=======
+  protected abstract inputInLastPosition(node: U): void
+>>>>>>> bda3c75b7669c9cd30a63fab175ee1ffa16d9250
 }
