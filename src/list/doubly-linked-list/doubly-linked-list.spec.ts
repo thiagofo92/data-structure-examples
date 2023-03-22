@@ -33,7 +33,7 @@ describe('# Pai linked list', () => {
     expect(nextNode?.prev).toStrictEqual(node)
   })
 
-  test('Insert element by index using the index 0', () => {
+  test('Insert element by index using index 0', () => {
     const doubly = new DoublyLinkedList()
     const element = 1
     doubly.insertByindex(element, 0)
@@ -43,14 +43,28 @@ describe('# Pai linked list', () => {
     expect(result?.element).toStrictEqual(element)
   })
 
-  test('Insert element by index using the index 2', () => {
+  test('Insert element by index using index 2', () => {
     const doubly = new DoublyLinkedList()
     const element = 1
     addFakeData(doubly)
-    
+
     doubly.insertByindex(element, 2)
 
     const result = doubly.getNodeByIndex(2)
+
+    expect(result?.element).toStrictEqual(element)
+  })
+
+  test('Insert element by index in last position', () => {
+    const doubly = new DoublyLinkedList()
+    const element = 1
+    addFakeData(doubly)
+
+    let lastPosition = doubly.getSize() - 1
+    doubly.insertByindex(element, lastPosition)
+    
+    lastPosition = doubly.getSize() - 1
+    const result = doubly.getNodeByIndex(lastPosition)
 
     expect(result?.element).toStrictEqual(element)
   })

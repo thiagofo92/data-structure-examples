@@ -28,10 +28,25 @@ export class DoublyLinkedList extends BaseLinkedList<number, DoublyNodeLinkedLis
   insertByindex(element: number, index: number): void {
     if(index === 0 && this.size === 0) return this.insert(element)
 
-    if(index > this.countOfIndex) throw Error('Index out of range')
+    if(index > this.size) throw Error('Index out of range')
 
+    if(this.countOfIndex === index) {
+      return this.insertInLastPosition(new DoublyNodeLinkedList(element, null, null))
+    }
 
+    const currently = this.getNodeByIndex(index)
+    const prevNode = currently?.prev || null
+    const newNode = new DoublyNodeLinkedList(element, currently, prevNode)
+    currently!.prev = newNode
 
+    if(prevNode) prevNode.next = newNode
+
+    if(index === 0) this.head = newNode
+
+    this.countOfIndex++
+    this.size++
+
+    return
   }
 
   removeByIndex(index: number): boolean {
@@ -55,16 +70,23 @@ export class DoublyLinkedList extends BaseLinkedList<number, DoublyNodeLinkedLis
 
     do {
       if(i === index) return currently
-      
+
       currently = currently?.next || null
       i++
-    } while(currently?.next)
+    } while(this.size > i)
 
     return null
   }
 
-  inputInLastPosition(node: DoublyNodeLinkedList): void {
-    throw new Error("Method not implemented.")
+  insertInLastPosition(node: DoublyNodeLinkedList): void {
+    if(this.size === 0) return this.insert(node.element)
+
+    node.prev = this.last
+    this.last!.next = node
+    this.last = node
+
+    this.countOfIndex++
+    this.size++
   }
 
   override getHead(): DoublyNodeLinkedList | null {
